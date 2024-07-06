@@ -1,3 +1,4 @@
+import math
 import pandas as pd 
 import matplotlib.pyplot as plt 
 
@@ -14,13 +15,16 @@ datos.loc[(datos['age'].isnull()) & (datos['gender'] == 'male'), 'age'] = media_
 
 ############################################## parte 3 
 promedio_edad = datos['age'].mean()
+cantidad_personas = datos['age'].count()
+cantidad_mujeres = (datos['gender'] == 'female').sum()
+cantidad_hombres = (datos['gender'] == 'male').sum()
 mediana_edad = datos['age'].median()
 moda_edad = datos['age'].mode()[0]
 rango_edad = datos['age'].max() - datos['age'].min()
 varianza_edad = datos['age'].var()
 desviacion_edad = datos['age'].std()
 
-print(promedio_edad, mediana_edad, moda_edad, rango_edad, varianza_edad, desviacion_edad)
+print(promedio_edad,cantidad_personas, mediana_edad, moda_edad, rango_edad, varianza_edad, desviacion_edad)
 
 ###################################################### parte 4
 tasa_supervivencia_general = datos['survived'].mean()
@@ -49,3 +53,14 @@ plt.suptitle('')
 plt.xlabel('Supervivencia (0=No, 1=Sí)')
 plt.ylabel('Edad')
 plt.show()
+
+############################################################# parte 1 Ej2
+raiz_cantidad_personas = math.sqrt(cantidad_personas)
+intervalo_confianza_mayor = (promedio_edad + (1.96 * (desviacion_edad / raiz_cantidad_personas )))
+intervalo_confianza_menor = (promedio_edad - (1.96 * (desviacion_edad / raiz_cantidad_personas)))
+print(intervalo_confianza_menor, intervalo_confianza_mayor)
+
+raiz_cantidad_mujeres = math.sqrt(cantidad_mujeres)
+intervalo_confianza_mayo_mujer = (promedio_edad + (1.96 * (desviacion_edad / raiz_cantidad_mujeres )))
+intervalo_confianza_menor_mujer = (promedio_edad - (1.96 * (desviacion_edad / raiz_cantidad_mujeres)))
+print(intervalo_confianza_menor, intervalo_confianza_mayor, cantidad_hombres, cantidad_mujeres)
