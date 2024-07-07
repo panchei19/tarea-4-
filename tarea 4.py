@@ -24,16 +24,22 @@ rango_edad = datos['age'].max() - datos['age'].min()
 varianza_edad = datos['age'].var()
 desviacion_edad = datos['age'].std()
 
-print(promedio_edad,cantidad_personas, mediana_edad, moda_edad, rango_edad, varianza_edad, desviacion_edad)
+print("Promedio de edad:", promedio_edad)
+print("Mediana de edad:", mediana_edad)
+print("Moda de edad:", moda_edad)
+print("Rango de edad:", rango_edad)
+print("Varianza de edad:", varianza_edad)
+print("Desviacion estandar de edad:", desviacion_edad)
 
 ###################################################### parte 4
 tasa_supervivencia_general = datos['survived'].mean()
-print(tasa_supervivencia_general)
+print("Tasa supervivencia general:", tasa_supervivencia_general)
 
 ########################################################parte 5 
 tasa_supervivencia_femenina = datos[datos['gender'] == 'female']['survived'].mean()
 tasa_supervivencia_masculina = datos[datos['gender'] == 'male']['survived'].mean()
-print(tasa_supervivencia_femenina, tasa_supervivencia_masculina)
+print("Tasa supervivencia femenina:", tasa_supervivencia_femenina)
+print("Tasa supervivencia masculina:", tasa_supervivencia_masculina)
 
 ############################################################## parte 6 
 plt.hist(datos[datos['p_class'] == 1]['age'], bins=15, alpha=0.6, label='Primera Clase')
