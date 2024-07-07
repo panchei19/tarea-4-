@@ -1,6 +1,7 @@
 import math
 import pandas as pd
 import matplotlib.pyplot as plt
+from scipy import stats
 
 datos = pd.read_csv('titanik.csv')
 datos.head()
@@ -72,15 +73,7 @@ intervalo_confianza_mayor = (
     promedio_edad + (1.96 * (desviacion_edad / raiz_cantidad_personas)))
 intervalo_confianza_menor = (
     promedio_edad - (1.96 * (desviacion_edad / raiz_cantidad_personas)))
-print(intervalo_confianza_menor, intervalo_confianza_mayor)
-
-raiz_cantidad_mujeres = math.sqrt(cantidad_mujeres)
-intervalo_confianza_mayo_mujer = (
-    promedio_edad + (1.96 * (desviacion_edad / raiz_cantidad_mujeres)))
-intervalo_confianza_menor_mujer = (
-    promedio_edad - (1.96 * (desviacion_edad / raiz_cantidad_mujeres)))
-print(intervalo_confianza_menor, intervalo_confianza_mayor,
-      cantidad_hombres, cantidad_mujeres)
+print("intervalo: ", intervalo_confianza_menor, intervalo_confianza_mayor)
 
 # parte 2 Ej2
 
@@ -105,3 +98,7 @@ error_estandar_hombres = desviacion_hombres / raiz_cantidad_hombres
 print(error_estandar_hombres, promedio_edad_hombres)
 intervalo_confianza_mayor_hombre = promedio_edad_hombres + (1.96 * error_estandar_hombres)
 intervalo_confianza_menor_hombre = promedio_edad_hombres - (1.96 * error_estandar_hombres)
+
+resultado_ttest_edad_genero = stats.ttest_ind(datos[datos['gender'] == 'female']['age'], datos[datos['gender'] == 'male']['age'])
+p_valor = resultado_ttest_edad_genero.pvalue
+print(f"Valor p obtenido: {p_valor}")
