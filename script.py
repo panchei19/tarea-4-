@@ -81,3 +81,27 @@ intervalo_confianza_menor_mujer = (
     promedio_edad - (1.96 * (desviacion_edad / raiz_cantidad_mujeres)))
 print(intervalo_confianza_menor, intervalo_confianza_mayor,
       cantidad_hombres, cantidad_mujeres)
+
+# parte 2 Ej2
+
+mujeres_interesadas = datos[(datos['gender'] == 'female') & (datos['age'].notnull())]
+promedio_edad_mujeres = mujeres_interesadas['age'].mean()
+desviacion_mujeres = mujeres_interesadas['age'].std()
+cantidad_mujeres = len(mujeres_interesadas)
+
+raiz_cantidad_mujeres = math.sqrt(cantidad_mujeres)
+error_estandar_mujeres = desviacion_mujeres / raiz_cantidad_mujeres
+print(error_estandar_mujeres, promedio_edad_mujeres)
+intervalo_confianza_mayor_mujer = promedio_edad_mujeres + (1.96 * error_estandar_mujeres)
+intervalo_confianza_menor_mujer = promedio_edad_mujeres - (1.96 * error_estandar_mujeres)
+
+hombres_interesadas = datos[(datos['gender'] == 'male') & (datos['age'].notnull())]
+promedio_edad_hombres = hombres_interesadas['age'].mean()
+desviacion_hombres = hombres_interesadas['age'].std()
+cantidad_hombres = len(hombres_interesadas)
+
+raiz_cantidad_hombres = math.sqrt(cantidad_hombres)
+error_estandar_hombres = desviacion_hombres / raiz_cantidad_hombres
+print(error_estandar_hombres, promedio_edad_hombres)
+intervalo_confianza_mayor_hombre = promedio_edad_hombres + (1.96 * error_estandar_hombres)
+intervalo_confianza_menor_hombre = promedio_edad_hombres - (1.96 * error_estandar_hombres)
