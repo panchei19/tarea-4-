@@ -99,6 +99,45 @@ print(error_estandar_hombres, promedio_edad_hombres)
 intervalo_confianza_mayor_hombre = promedio_edad_hombres + (1.96 * error_estandar_hombres)
 intervalo_confianza_menor_hombre = promedio_edad_hombres - (1.96 * error_estandar_hombres)
 
+#parte 2 ej3
+
+t_statistic, valor = stats.ttest_ind(datos[datos['gender'] == 'male']['survived'], datos[datos['gender'] == 'female']['survived'])
+
+if valor < 0.01:
+    print("Existe una diferencia significativa en la tasa de supervivencia entre hombres y mujeres.")
+else:
+    print("No existe una diferencia significativa en la tasa de supervivencia entre hombres y mujeres.")
+
+
+clase1_sobrevivientes = datos[datos['p_class'] == '1']['survived']
+clase2_sobrevivientes = datos[datos['p_class'] == '2']['survived']
+clase3_sobrevivientes = datos[datos['p_class'] == '3']['survived']
+
+t_statistic, value = stats.ttest_ind(clase1_sobrevivientes, clase2_sobrevivientes)
+
+if value < 0.01:
+    print("Existe una diferencia significativa en la tasa de supervivencia entre la clase 1 y la clase 2.")
+else:
+    print("No existe una diferencia significativa en la tasa de supervivencia entre la clase 1 y la clase 2.")
+
+t_statistic, value = stats.ttest_ind(clase2_sobrevivientes, clase3_sobrevivientes)
+if value < 0.01:
+    print("Existe una diferencia significativa en la tasa de supervivencia entre la clase 2 y la clase 3.")
+else:
+    print("No existe una diferencia significativa en la tasa de supervivencia entre la clase 2 y la clase 3.")
+
+
+t_statistic, value = stats.ttest_ind(clase1_sobrevivientes, clase3_sobrevivientes)
+
+if value < 0.01:
+    print("Existe una diferencia significativa en la tasa de supervivencia entre la clase 1 y la clase 3.")
+else:
+    print("No existe una diferencia significativa en la tasa de supervivencia entre la clase 1 y la clase 3.")
+    
+# Parte 2 ej 4
+
 resultado_ttest_edad_genero = stats.ttest_ind(datos[datos['gender'] == 'female']['age'], datos[datos['gender'] == 'male']['age'])
 p_valor = resultado_ttest_edad_genero.pvalue
 print(f"Valor p obtenido: {p_valor}")
+
+
